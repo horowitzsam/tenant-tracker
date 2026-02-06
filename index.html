@@ -1661,8 +1661,6 @@
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <!-- Leaflet Heat Map Plugin -->
     <script src="https://unpkg.com/leaflet.heat@0.2.0/dist/leaflet-heat.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
     <script>
         // Firebase Configuration - Connected to sh-tenant-tracker
@@ -3133,34 +3131,8 @@
         }
 
         // Print map
-        document.getElementById('printMapBtn').addEventListener('click', async () => {
-    const btn = document.getElementById('printMapBtn');
-    btn.disabled = true;
-    btn.innerHTML = '<span>Generating...</span>';
-    
-    try {
-        const mapEl = document.getElementById('map');
-        const canvas = await html2canvas(mapEl, { useCORS: true, scale: 2 });
-        
-        const { jsPDF } = window.jspdf;
-        const pdf = new jsPDF('landscape', 'mm', 'a4');
-        
-        pdf.setFontSize(20);
-        pdf.text('TIMs List - Tenant Locations', 15, 20);
-        pdf.setFontSize(12);
-        pdf.text('Square Footage Demand Density Map', 15, 28);
-        
-        const imgData = canvas.toDataURL('image/png');
-        pdf.addImage(imgData, 'PNG', 15, 35, 267, 150);
-        
-        pdf.save('tims-map-' + new Date().toISOString().split('T')[0] + '.pdf');
-    } catch (err) {
-        alert('PDF export failed: ' + err.message);
-    }
-    
-    btn.disabled = false;
-    btn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9V2h12v7M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg> Export PDF';
-});
+        document.getElementById('printMapBtn').addEventListener('click', () => {
+            window.print();
         });
 
         // Initialize
