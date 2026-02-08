@@ -1,4 +1,4 @@
-
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -1325,6 +1325,139 @@
             color: #374151;
         }
 
+        /* Manage Search Areas Modal */
+        .area-def-list {
+            max-height: 500px;
+            overflow-y: auto;
+        }
+
+        .area-def-item {
+            border: 1px solid var(--gray-200);
+            border-radius: 8px;
+            margin-bottom: 0.75rem;
+            overflow: hidden;
+        }
+
+        .area-def-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem 1rem;
+            background: var(--gray-50);
+            cursor: pointer;
+            transition: background 0.15s;
+        }
+
+        .area-def-header:hover {
+            background: var(--gray-100);
+        }
+
+        .area-def-name {
+            font-weight: 600;
+            font-size: 0.9375rem;
+            color: var(--gray-800);
+        }
+
+        .area-def-status {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.375rem;
+            font-size: 0.75rem;
+            padding: 0.25rem 0.5rem;
+            border-radius: 12px;
+        }
+
+        .area-def-status.defined {
+            background: #dcfce7;
+            color: #059669;
+        }
+
+        .area-def-status.undefined {
+            background: #fef3c7;
+            color: #d97706;
+        }
+
+        .area-def-body {
+            display: none;
+            padding: 1rem;
+            border-top: 1px solid var(--gray-200);
+        }
+
+        .area-def-body.open {
+            display: block;
+        }
+
+        .area-def-towns-label {
+            font-size: 0.8125rem;
+            font-weight: 500;
+            color: var(--gray-600);
+            margin-bottom: 0.5rem;
+        }
+
+        .area-def-tag-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.375rem;
+            padding: 0.375rem;
+            border: 1px solid var(--gray-300);
+            border-radius: 8px;
+            min-height: 42px;
+            cursor: text;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        .area-def-tag-container:focus-within {
+            border-color: #7c3aed;
+            box-shadow: 0 0 0 3px rgba(124,58,237,0.1);
+        }
+
+        .area-def-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.25rem;
+            padding: 0.25rem 0.5rem;
+            background: #7c3aed;
+            color: white;
+            border-radius: 4px;
+            font-size: 0.8125rem;
+        }
+
+        .area-def-tag button {
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            opacity: 0.7;
+        }
+
+        .area-def-tag button:hover {
+            opacity: 1;
+        }
+
+        .area-def-input {
+            flex: 1;
+            min-width: 150px;
+            border: none;
+            outline: none;
+            padding: 0.25rem;
+            font-size: 0.9375rem;
+        }
+
+        .area-def-hint {
+            font-size: 0.75rem;
+            color: var(--gray-500);
+            margin-top: 0.375rem;
+        }
+
+        .area-def-save-row {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 0.75rem;
+        }
+
         .view-toggle-group {
             display: flex;
             gap: 0.5rem;
@@ -1606,6 +1739,13 @@
                             </svg>
                             Search Areas
                         </button>
+                        <button id="manageAreasBtn" class="btn btn-sm btn-secondary" title="Define search area boundaries">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="3"/>
+                                <path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/>
+                            </svg>
+                            Define Areas
+                        </button>
                         <button id="printMapBtn" class="btn btn-sm btn-secondary">
                             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <path d="M6 9V2h12v7M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2"/>
@@ -1849,6 +1989,31 @@
         </div>
     </div>
 
+    <!-- Manage Search Areas Modal -->
+    <div id="manageAreasModal" class="modal-overlay">
+        <div class="modal" style="max-width: 650px;">
+            <div class="modal-header">
+                <h2>Define Search Area Boundaries</h2>
+                <button class="modal-close" onclick="closeModal('manageAreasModal')">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M18 6L6 18M6 6l12 12"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p style="margin-bottom: 1rem; color: var(--gray-600); font-size: 0.875rem;">
+                    For each search area, specify the towns or cities that make up that market. Their boundaries will be fetched from OpenStreetMap and displayed on the map.
+                </p>
+                <div id="areaDefList" class="area-def-list">
+                    <!-- Dynamically populated -->
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-ghost" onclick="closeModal('manageAreasModal')">Close</button>
+            </div>
+        </div>
+    </div>
+
     <!-- Toast Container -->
     <div id="toastContainer" class="toast-container"></div>
 
@@ -1966,6 +2131,7 @@
             document.getElementById('mainApp').style.display = 'block';
 
             updateUserBadge();
+            loadAreaDefinitions();
             loadData();
         }
 
@@ -3097,6 +3263,7 @@
         let currentMapMode = 'markers'; // 'markers', 'heatmap', or 'both'
         let geocodingCache = {}; // Cache geocoded addresses
         let areaBoundaryCache = {}; // Cache area boundary GeoJSON
+        let areaDefinitions = {}; // Maps area name -> { towns: ['Town1', 'Town2'] }
 
         // Heat map tuning (edit these to change how the heat map looks)
         const HEAT_MAP_CONFIG = {
@@ -3190,6 +3357,181 @@
         // SEARCH AREA BOUNDARY FUNCTIONS
         // ==========================================
 
+        // Load area definitions from storage
+        function loadAreaDefinitions() {
+            if (!DEMO_MODE) {
+                db.ref('areaDefinitions').on('value', (snapshot) => {
+                    areaDefinitions = snapshot.val() || {};
+                });
+            } else {
+                const saved = localStorage.getItem('cre_area_definitions');
+                if (saved) {
+                    try { areaDefinitions = JSON.parse(saved); } catch (e) { areaDefinitions = {}; }
+                }
+            }
+        }
+
+        // Save area definitions to storage
+        async function saveAreaDefinitions() {
+            if (!DEMO_MODE) {
+                await db.ref('areaDefinitions').set(areaDefinitions);
+            } else {
+                localStorage.setItem('cre_area_definitions', JSON.stringify(areaDefinitions));
+            }
+        }
+
+        // Save definition for a single area
+        async function saveAreaDefinition(areaName, towns) {
+            areaDefinitions[areaName] = { towns: towns };
+            // Clear cached boundaries for this area so they get re-fetched
+            delete areaBoundaryCache['__group__' + areaName];
+            await saveAreaDefinitions();
+            showToast(`Boundaries saved for "${areaName}"`, 'success');
+            // Refresh overlays if they're showing
+            if (showSearchAreas && map) {
+                refreshSearchAreaOverlays();
+            }
+        }
+
+        // ==========================================
+        // MANAGE SEARCH AREAS MODAL
+        // ==========================================
+
+        document.getElementById('manageAreasBtn').addEventListener('click', () => {
+            renderAreaDefList();
+            openModal('manageAreasModal');
+        });
+
+        function renderAreaDefList() {
+            const container = document.getElementById('areaDefList');
+            const areaDemand = aggregateAreaDemand();
+            const areaNames = Object.keys(areaDemand).sort();
+
+            if (areaNames.length === 0) {
+                container.innerHTML = '<p style="text-align: center; color: var(--gray-500); padding: 2rem;">No search areas found. Add tenants with search areas first.</p>';
+                return;
+            }
+
+            container.innerHTML = areaNames.map(areaName => {
+                const def = areaDefinitions[areaName];
+                const towns = def ? def.towns : [];
+                const hasDef = towns.length > 0;
+                const demand = areaDemand[areaName];
+
+                return `
+                    <div class="area-def-item" data-area="${escapeHtml(areaName)}">
+                        <div class="area-def-header" onclick="toggleAreaDef(this)">
+                            <div>
+                                <span class="area-def-name">${escapeHtml(areaName)}</span>
+                                <span style="font-size: 0.75rem; color: var(--gray-500); margin-left: 0.5rem;">
+                                    ${demand.tenantCount} tenant${demand.tenantCount !== 1 ? 's' : ''} · ${formatNumber(demand.totalSqft)} SF
+                                </span>
+                            </div>
+                            <span class="area-def-status ${hasDef ? 'defined' : 'undefined'}">
+                                ${hasDef ? '✓ ' + towns.length + ' town' + (towns.length !== 1 ? 's' : '') : '⚠ Not defined'}
+                            </span>
+                        </div>
+                        <div class="area-def-body" id="areaDefBody_${areaName.replace(/[^a-zA-Z0-9]/g, '_')}">
+                            <div class="area-def-towns-label">Towns / cities that define this market:</div>
+                            <div class="area-def-tag-container" id="areaDefTags_${areaName.replace(/[^a-zA-Z0-9]/g, '_')}" onclick="focusAreaDefInput(this)">
+                                ${towns.map(t => `
+                                    <span class="area-def-tag">
+                                        ${escapeHtml(t)}
+                                        <button type="button" onclick="event.stopPropagation(); removeAreaDefTown('${escapeHtml(areaName).replace(/'/g, "\\'")}', '${escapeHtml(t).replace(/'/g, "\\'")}')">
+                                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+                                        </button>
+                                    </span>
+                                `).join('')}
+                                <input type="text" class="area-def-input" placeholder="Type a town name, press Enter..."
+                                       onkeydown="handleAreaDefKeydown(event, '${escapeHtml(areaName).replace(/'/g, "\\'")}')" />
+                            </div>
+                            <div class="area-def-hint">Press Enter or comma to add. Example: "Stamford, CT" or "Greenwich"</div>
+                            <div class="area-def-save-row">
+                                <button class="btn btn-success btn-sm" onclick="saveAreaDefFromUI('${escapeHtml(areaName).replace(/'/g, "\\'")}')">
+                                    Save Boundaries
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function toggleAreaDef(header) {
+            const body = header.nextElementSibling;
+            body.classList.toggle('open');
+        }
+
+        function focusAreaDefInput(container) {
+            const input = container.querySelector('.area-def-input');
+            if (input) input.focus();
+        }
+
+        function handleAreaDefKeydown(event, areaName) {
+            if (event.key === 'Enter' || event.key === ',') {
+                event.preventDefault();
+                const input = event.target;
+                const town = input.value.replace(/,/g, '').trim();
+                if (town) {
+                    addAreaDefTown(areaName, town);
+                    input.value = '';
+                }
+            } else if (event.key === 'Backspace' && event.target.value === '') {
+                // Remove last town tag
+                const def = areaDefinitions[areaName];
+                if (def && def.towns.length > 0) {
+                    removeAreaDefTown(areaName, def.towns[def.towns.length - 1]);
+                }
+            }
+        }
+
+        function addAreaDefTown(areaName, town) {
+            if (!areaDefinitions[areaName]) {
+                areaDefinitions[areaName] = { towns: [] };
+            }
+            if (!areaDefinitions[areaName].towns.includes(town)) {
+                areaDefinitions[areaName].towns.push(town);
+            }
+            renderAreaDefList();
+            // Re-open the panel we were editing
+            const safeId = areaName.replace(/[^a-zA-Z0-9]/g, '_');
+            const body = document.getElementById('areaDefBody_' + safeId);
+            if (body) {
+                body.classList.add('open');
+                setTimeout(() => {
+                    const input = body.querySelector('.area-def-input');
+                    if (input) input.focus();
+                }, 50);
+            }
+        }
+
+        function removeAreaDefTown(areaName, town) {
+            if (areaDefinitions[areaName]) {
+                areaDefinitions[areaName].towns = areaDefinitions[areaName].towns.filter(t => t !== town);
+            }
+            renderAreaDefList();
+            // Re-open the panel
+            const safeId = areaName.replace(/[^a-zA-Z0-9]/g, '_');
+            const body = document.getElementById('areaDefBody_' + safeId);
+            if (body) {
+                body.classList.add('open');
+                setTimeout(() => {
+                    const input = body.querySelector('.area-def-input');
+                    if (input) input.focus();
+                }, 50);
+            }
+        }
+
+        function saveAreaDefFromUI(areaName) {
+            const def = areaDefinitions[areaName];
+            const towns = def ? def.towns : [];
+            saveAreaDefinition(areaName, towns);
+        }
+
+        // ==========================================
+        // GEOCODING & RENDERING
+        // ==========================================
+
         // Aggregate SF demand per search area
         function aggregateAreaDemand() {
             const areaDemand = {};
@@ -3219,7 +3561,6 @@
         function getAreaDemandColor(sqft, maxSqft) {
             if (maxSqft === 0) return { fill: 'rgba(124,58,237,0.2)', stroke: 'rgba(124,58,237,0.6)' };
             const ratio = Math.min(sqft / maxSqft, 1);
-            // Interpolate opacity from 0.12 to 0.45 based on demand
             const fillOpacity = 0.12 + (ratio * 0.33);
             const strokeOpacity = 0.5 + (ratio * 0.4);
             return {
@@ -3228,11 +3569,10 @@
             };
         }
 
-        // Geocode an area name to get boundary polygon from Nominatim
-        async function geocodeAreaBoundary(areaName) {
-            // Check cache first
-            if (areaBoundaryCache[areaName]) {
-                return areaBoundaryCache[areaName];
+        // Geocode a single place name to get boundary polygon from Nominatim
+        async function geocodeAreaBoundary(placeName) {
+            if (areaBoundaryCache[placeName]) {
+                return areaBoundaryCache[placeName];
             }
 
             // Rate limit: wait 1.1 seconds between requests (Nominatim policy)
@@ -3240,11 +3580,9 @@
 
             try {
                 const response = await fetch(
-                    `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(areaName)}&limit=1&polygon_geojson=1`,
+                    `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(placeName)}&limit=1&polygon_geojson=1`,
                     {
-                        headers: {
-                            'User-Agent': 'TenantTracker/1.0'
-                        }
+                        headers: { 'User-Agent': 'TenantTracker/1.0' }
                     }
                 );
 
@@ -3255,35 +3593,33 @@
                     const geoType = result.geojson ? result.geojson.type : null;
 
                     if (result.geojson && (geoType === 'Polygon' || geoType === 'MultiPolygon')) {
-                        // Got actual boundary polygon
                         const boundary = {
                             type: 'polygon',
                             geojson: result.geojson,
                             displayName: result.display_name,
                             center: { lat: parseFloat(result.lat), lng: parseFloat(result.lon) }
                         };
-                        areaBoundaryCache[areaName] = boundary;
+                        areaBoundaryCache[placeName] = boundary;
                         return boundary;
                     } else {
-                        // No polygon available — create a circle-like polygon as fallback
                         const center = { lat: parseFloat(result.lat), lng: parseFloat(result.lon) };
                         const boundary = {
                             type: 'circle_fallback',
                             center: center,
                             displayName: result.display_name
                         };
-                        areaBoundaryCache[areaName] = boundary;
+                        areaBoundaryCache[placeName] = boundary;
                         return boundary;
                     }
                 }
             } catch (error) {
-                console.error(`Failed to geocode area boundary for "${areaName}":`, error);
+                console.error(`Failed to geocode boundary for "${placeName}":`, error);
             }
 
             return null;
         }
 
-        // Create a circle polygon (GeoJSON) as fallback for areas without boundary data
+        // Create a circle polygon (GeoJSON) as fallback
         function createCircleGeoJSON(center, radiusKm, numPoints) {
             numPoints = numPoints || 48;
             const coords = [];
@@ -3295,10 +3631,19 @@
                 const lng = center.lng + (dx / (111.32 * Math.cos(center.lat * Math.PI / 180)));
                 coords.push([lng, lat]);
             }
-            return {
-                type: 'Polygon',
-                coordinates: [coords]
-            };
+            return { type: 'Polygon', coordinates: [coords] };
+        }
+
+        // Render a single boundary on the map and return the Leaflet layer
+        function renderBoundaryLayer(boundary, style) {
+            if (boundary.type === 'polygon') {
+                return L.geoJSON(boundary.geojson, { style });
+            } else {
+                const circleGeoJSON = createCircleGeoJSON(boundary.center, 3);
+                return L.geoJSON(circleGeoJSON, {
+                    style: { ...style, dashArray: '5,5' }
+                });
+            }
         }
 
         // Refresh search area overlays on the map
@@ -3307,13 +3652,11 @@
 
             const statusEl = document.getElementById('geocodeStatus');
 
-            // Initialize the layer if needed
             if (!searchAreasLayer) {
                 searchAreasLayer = L.layerGroup();
             }
             searchAreasLayer.clearLayers();
 
-            // Get area demand data
             const areaDemand = aggregateAreaDemand();
             const areaNames = Object.keys(areaDemand);
 
@@ -3324,7 +3667,6 @@
                 return;
             }
 
-            // Find max sqft for color scaling
             const maxSqft = Math.max(...Object.values(areaDemand).map(d => d.totalSqft));
 
             statusEl.className = 'geocode-status loading';
@@ -3332,64 +3674,65 @@
 
             let loadedCount = 0;
             let errorCount = 0;
+            let undefinedAreas = [];
 
             for (const areaName of areaNames) {
                 try {
-                    statusEl.textContent = `Loading search area boundaries... ${loadedCount + errorCount + 1}/${areaNames.length} (${areaName})`;
+                    const demand = areaDemand[areaName];
+                    const colors = getAreaDemandColor(demand.totalSqft, maxSqft);
+                    const style = {
+                        color: colors.stroke,
+                        weight: 2,
+                        fillColor: colors.fill,
+                        fillOpacity: 1,
+                        opacity: 1
+                    };
 
-                    const boundary = await geocodeAreaBoundary(areaName);
-                    if (boundary) {
-                        loadedCount++;
-                        const demand = areaDemand[areaName];
-                        const colors = getAreaDemandColor(demand.totalSqft, maxSqft);
+                    const def = areaDefinitions[areaName];
+                    const towns = def ? def.towns : [];
 
-                        let layer;
+                    // Build popup content (shared for all polygons in this area)
+                    const tenantList = demand.tenants.map(t =>
+                        `<li>${escapeHtml(t.name)} (${escapeHtml(t.sqft)} SF)</li>`
+                    ).join('');
+                    const popupContent = `
+                        <div class="area-popup-title">${escapeHtml(areaName)}</div>
+                        <div class="area-popup-stat"><strong>${demand.tenantCount}</strong> tenant${demand.tenantCount !== 1 ? 's' : ''} searching</div>
+                        <div class="area-popup-stat"><strong>${formatNumber(demand.totalSqft)}</strong> total SF demand</div>
+                        ${towns.length > 0 ? `<div class="area-popup-stat" style="color:#7c3aed;">Defined by: ${escapeHtml(towns.join(', '))}</div>` : ''}
+                        <div class="area-popup-tenants">
+                            Tenants:
+                            <ul>${tenantList}</ul>
+                        </div>
+                    `;
 
-                        if (boundary.type === 'polygon') {
-                            // Draw the actual boundary polygon
-                            layer = L.geoJSON(boundary.geojson, {
-                                style: {
-                                    color: colors.stroke,
-                                    weight: 2,
-                                    fillColor: colors.fill,
-                                    fillOpacity: 1,
-                                    opacity: 1
-                                }
-                            });
-                        } else {
-                            // Fallback: draw a circle-like polygon (~3km radius)
-                            const circleGeoJSON = createCircleGeoJSON(boundary.center, 3);
-                            layer = L.geoJSON(circleGeoJSON, {
-                                style: {
-                                    color: colors.stroke,
-                                    weight: 2,
-                                    fillColor: colors.fill,
-                                    fillOpacity: 1,
-                                    opacity: 1,
-                                    dashArray: '5,5'
-                                }
-                            });
+                    if (towns.length > 0) {
+                        // User has defined this area as a group of towns — geocode each
+                        let townSuccessCount = 0;
+                        let groupCenterLat = 0, groupCenterLng = 0;
+
+                        statusEl.textContent = `Loading boundaries for "${areaName}" (${towns.length} towns)...`;
+
+                        for (const town of towns) {
+                            const boundary = await geocodeAreaBoundary(town);
+                            if (boundary) {
+                                townSuccessCount++;
+                                const layer = renderBoundaryLayer(boundary, style);
+                                layer.bindPopup(popupContent, { maxWidth: 300 });
+                                searchAreasLayer.addLayer(layer);
+
+                                const c = boundary.center;
+                                groupCenterLat += c.lat;
+                                groupCenterLng += c.lng;
+                            }
                         }
 
-                        // Create popup content
-                        const tenantList = demand.tenants.map(t =>
-                            `<li>${escapeHtml(t.name)} (${escapeHtml(t.sqft)} SF)</li>`
-                        ).join('');
-
-                        layer.bindPopup(`
-                            <div class="area-popup-title">${escapeHtml(areaName)}</div>
-                            <div class="area-popup-stat"><strong>${demand.tenantCount}</strong> tenant${demand.tenantCount !== 1 ? 's' : ''} searching</div>
-                            <div class="area-popup-stat"><strong>${formatNumber(demand.totalSqft)}</strong> total SF demand</div>
-                            <div class="area-popup-tenants">
-                                Tenants:
-                                <ul>${tenantList}</ul>
-                            </div>
-                        `, { maxWidth: 300 });
-
-                        // Add area name label at center
-                        const labelCenter = boundary.center || (layer.getBounds ? layer.getBounds().getCenter() : null);
-                        if (labelCenter) {
-                            const label = L.marker([labelCenter.lat, labelCenter.lng], {
+                        if (townSuccessCount > 0) {
+                            loadedCount++;
+                            // Add label at center of all towns
+                            groupCenterLat /= townSuccessCount;
+                            groupCenterLng /= townSuccessCount;
+                            const label = L.marker([groupCenterLat, groupCenterLng], {
                                 icon: L.divIcon({
                                     className: 'area-label',
                                     html: `<div style="
@@ -3408,11 +3751,46 @@
                                 })
                             });
                             searchAreasLayer.addLayer(label);
+                        } else {
+                            errorCount++;
                         }
-
-                        searchAreasLayer.addLayer(layer);
                     } else {
-                        errorCount++;
+                        // No definition — try geocoding the area name directly
+                        statusEl.textContent = `Loading search area boundaries... (${areaName})`;
+
+                        const boundary = await geocodeAreaBoundary(areaName);
+                        if (boundary) {
+                            loadedCount++;
+                            const layer = renderBoundaryLayer(boundary, style);
+                            layer.bindPopup(popupContent, { maxWidth: 300 });
+                            searchAreasLayer.addLayer(layer);
+
+                            const labelCenter = boundary.center;
+                            if (labelCenter) {
+                                const label = L.marker([labelCenter.lat, labelCenter.lng], {
+                                    icon: L.divIcon({
+                                        className: 'area-label',
+                                        html: `<div style="
+                                            background: rgba(124,58,237,0.85);
+                                            color: white;
+                                            padding: 2px 8px;
+                                            border-radius: 4px;
+                                            font-size: 11px;
+                                            font-weight: 600;
+                                            white-space: nowrap;
+                                            text-align: center;
+                                            box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+                                        ">${escapeHtml(areaName)}</div>`,
+                                        iconSize: null,
+                                        iconAnchor: [0, 0]
+                                    })
+                                });
+                                searchAreasLayer.addLayer(label);
+                            }
+                        } else {
+                            errorCount++;
+                            undefinedAreas.push(areaName);
+                        }
                     }
                 } catch (error) {
                     errorCount++;
@@ -3422,8 +3800,10 @@
 
             // Update status
             statusEl.className = 'geocode-status';
-            if (errorCount > 0) {
-                statusEl.textContent = `Showing ${loadedCount} search area boundaries. ${errorCount} area(s) could not be found.`;
+            if (errorCount > 0 && undefinedAreas.length > 0) {
+                statusEl.textContent = `Showing ${loadedCount} search areas. ${errorCount} area(s) not found — click "Define Areas" to map them to towns.`;
+            } else if (errorCount > 0) {
+                statusEl.textContent = `Showing ${loadedCount} search areas. ${errorCount} area(s) could not be geocoded.`;
             } else {
                 statusEl.textContent = `Showing ${loadedCount} search area boundaries.`;
             }
