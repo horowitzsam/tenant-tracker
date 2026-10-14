@@ -2062,7 +2062,7 @@
             if (!DEMO_MODE) {
                 firebase.initializeApp(firebaseConfig);
                 const appCheck = firebase.appCheck();
-                appCheck.activate("6Ldf1u4tAAAAALPYV7204FsOOxTo5BIH8TH4qRp7", true);
+                appCheck.activate(new firebase.appCheck.ReCaptchaEnterpriseProvider("6Ldf1u4tAAAAALPYV7204FsOOxTo5BIH8TH4qRp7"), true);
                 db = firebase.database();
             }
 
